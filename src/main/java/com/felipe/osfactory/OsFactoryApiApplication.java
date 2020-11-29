@@ -1,4 +1,4 @@
-package com.felipe.osfactory.api;
+package com.felipe.osfactory;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
