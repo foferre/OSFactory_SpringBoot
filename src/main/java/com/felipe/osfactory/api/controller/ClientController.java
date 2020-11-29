@@ -2,13 +2,12 @@ package com.felipe.osfactory.api.controller;
 
 import com.felipe.osfactory.domain.model.Client;
 import com.felipe.osfactory.domain.repository.ClientRepository;
+import com.felipe.osfactory.domain.service.RegisterClientService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
 import javax.validation.Valid;
 import java.util.List;
 import java.util.Optional;
@@ -17,11 +16,11 @@ import java.util.Optional;
 @RequestMapping("/clients")
 public class ClientController {
 
-    @PersistenceContext
-    private EntityManager manager;
-
     @Autowired
     private ClientRepository clientRepository;
+
+    @Autowired
+    private RegisterClientService registerClientService;
 
     @GetMapping
     public List<Client> listAll(){
@@ -42,7 +41,7 @@ public class ClientController {
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public Client add(@Valid @RequestBody Client client){
-        return clientRepository.save(client);
+        return registerClientService.save(client);
     }
 
     @PutMapping("/{id}")
@@ -52,7 +51,7 @@ public class ClientController {
         }
 
         client.setId(id);
-        client = clientRepository.save(client);
+        client = registerClientService.save(client);
 
         return ResponseEntity.ok(client);
     }
@@ -63,7 +62,7 @@ public class ClientController {
             return ResponseEntity.notFound().build();
         }
 
-        clientRepository.deleteById(id);
+        registerClientService.remove(id);
 
         return ResponseEntity.noContent().build();
     }
