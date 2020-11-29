@@ -1,0 +1,12 @@
+create table service_order(
+id bigint not null auto_increment,
+client_id bigint not null,
+escription text not null,
+price decimal(10,2) not null,
+tatus varchar(20) not null,
+open_date datetime not null, finish_date datetime,
+primary key (id)
+);
+
+alter table service_order add constraint fk_service_order_client
+foreign key (client_id) references client(id);
