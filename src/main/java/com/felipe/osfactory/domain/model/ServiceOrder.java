@@ -1,6 +1,7 @@
 package com.felipe.osfactory.domain.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.felipe.osfactory.domain.ValidationGroups;
 
 import javax.persistence.*;
 import javax.validation.Valid;
@@ -10,6 +11,7 @@ import javax.validation.groups.ConvertGroup;
 import javax.validation.groups.Default;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.time.OffsetDateTime;
 
 @Entity
 public class ServiceOrder {
@@ -19,7 +21,7 @@ public class ServiceOrder {
     private Long id;
 
     @Valid
-    //@ConvertGroup(from = Default.class, to = YYY)
+    @ConvertGroup(from = Default.class, to = ValidationGroups.ClientId.class)
     @NotNull
     @ManyToOne
     private Client client;
@@ -35,10 +37,10 @@ public class ServiceOrder {
     private StatusServiceOrder status;
 
     @JsonProperty(access = JsonProperty.Access.READ_ONLY)
-    private LocalDateTime openDate;
+    private OffsetDateTime openDate;
 
     @JsonProperty(access = JsonProperty.Access.READ_ONLY)
-    private LocalDateTime finishDate;
+    private OffsetDateTime finishDate;
 
     public Long getId() {
         return id;
@@ -70,16 +72,16 @@ public class ServiceOrder {
     public void setStatus(StatusServiceOrder status) {
         this.status = status;
     }
-    public LocalDateTime getOpenDate() {
+    public OffsetDateTime getOpenDate() {
         return openDate;
     }
-    public void setOpenDate(LocalDateTime openDate) {
+    public void setOpenDate(OffsetDateTime openDate) {
         this.openDate = openDate;
     }
-    public LocalDateTime getFinishDate() {
+    public OffsetDateTime getFinishDate() {
         return finishDate;
     }
-    public void setFinishDate(LocalDateTime finishDate) {
+    public void setFinishDate(OffsetDateTime finishDate) {
         this.finishDate = finishDate;
     }
 

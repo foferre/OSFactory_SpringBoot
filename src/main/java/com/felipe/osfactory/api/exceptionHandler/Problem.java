@@ -3,12 +3,13 @@ package com.felipe.osfactory.api.exceptionHandler;
 import com.fasterxml.jackson.annotation.JsonInclude;
 
 import java.time.LocalDateTime;
+import java.time.OffsetDateTime;
 import java.util.List;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class Problem {
     private Integer status;
-    private LocalDateTime dateHour;
+    private OffsetDateTime dateHour;
     private String title;
     private List<Field> fields;
 
@@ -41,10 +42,10 @@ public class Problem {
     public void setStatus(Integer status) {
         this.status = status;
     }
-    public LocalDateTime getDateHour() {
+    public OffsetDateTime getDateHour() {
         return dateHour;
     }
-    public void setDateHour(LocalDateTime dateHour) {
+    public void setDateHour(OffsetDateTime dateHour) {
         this.dateHour = dateHour;
     }
     public String getTitle() {
